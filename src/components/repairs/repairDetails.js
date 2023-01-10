@@ -1,29 +1,76 @@
 import React from 'react';
-import {Link, useParams } from 'react-router-dom';
-import {getRepairByIdApiCall} from '../../apiCalls/repairApiCalls';
-import {getFormattedDate} from '../../helpers/dateHelper';
+import { Link } from 'react-router-dom';
+import { getRepairByIdApiCall } from '../../apiCalls/repairApiCalls';
+import RepairDetailsData from './repairDetailsData'
 
-function RepairDetails() {
-    const {repairId} = useParams();
-    const repair = getRepairByIdApiCall(repairId);
-    console.log(repair);
-    const date = repair.repairment_date ? getFormattedDate(repair.repairment_date) : "";
-    
-    return (
-        <main>
-            <h2>Szczegóły naprawy</h2>
-            <p>Auto: {repair.car.maker + " " + repair.car.Model}</p>
-            <p>Mechanik: {repair.mechanic.firstName + " " + repair.mechanic.lastName}</p>
-            <p>Opis: {repair.description}</p>
-            <p>Data naprawy: {date}</p>
+class RepairDetails extends React.Component {
+    constructor(props) {
+        super(props)
+        let { repairId } = props.match.params
+        this.state = {
+            repairId: repairId,
+            repair: null,
+            error: null,
+            isLoaded: false
+        }
+    }
 
-            <div className="form-buttons">
-                <Link to="/repairs" className="button-cancel">Powrót</Link>
-            </div>
+    componentDidMount() {
+        this.fetchRepairDetails()
+    }
 
-        </main>
+    fetchRepairDetails = () => {
+        getRepairByIdApiCall(this.state.repairId)
+            .then(res => res.json())
+            .then(
+                (data) => {
+                    if (data.message) {
+                        this.setState({
+                            repair: null,
+                            message: data.message
+                        })
+                    } else {
+                        this.setState({
+                            repair: data,
+                            message: null,
+                        })
+                    }
+                    this.setState({
+                        isLoaded: true,
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                })
+    }
 
-    )
+    render() {
+        const { repair, error, isLoaded, message } = this.state
+        let content;
 
+        if (error) {
+            content = <p>Błąd: {error.message}</p>
+        } else if (!isLoaded) {
+            content = <p>Pobieranie danych napraw...</p>
+        } else if (message) {
+            content = <p>{message}</p>
+        } else {
+            content = <RepairDetailsData repairData={repair} />
+        }
+
+        return (
+            <main>
+                <h2>Szczegóły Napraw</h2>
+                {content}
+                <div className="section-buttons">
+                    <Link to="/repairs" className="button-back">Powrót</Link>
+                </div>
+            </main >
+        )
+    }
 }
+
 export default RepairDetails

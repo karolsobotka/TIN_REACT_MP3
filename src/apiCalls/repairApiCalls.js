@@ -1,10 +1,13 @@
-import { repairList, repairDetailsList } from "./repairApiMockData";
+const repairsBaseUrl = 'http://localhost:3000/api/repairment'
 
 export function getRepairApiCall() {
-    return repairList;
+    const promise = fetch(repairsBaseUrl);
+
+    return promise;
 }
 
 export function getRepairByIdApiCall(repairId) {
-    const repair = repairDetailsList.find(repair => repair._id ===repairId);
-    return repair;
+    const url = `${repairsBaseUrl}/${repairId}`;
+    const promise = fetch(url);
+    return promise;
 }

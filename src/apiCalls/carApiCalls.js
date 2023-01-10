@@ -1,10 +1,13 @@
-import { carList, carDetailsList } from "./carApiMockData";
+const carsBaseUrl = 'http://localhost:3000/api/car'
 
 export function getCarApiCall() {
-    return carList;
+    const promise = fetch(carsBaseUrl);
+
+    return promise;
 }
 
 export function getCarByIdApiCall(carId) {
-    const car = carDetailsList.find(car => car._id ===carId);
-    return car;
+    const url = `${carsBaseUrl}/${carId}`;
+    const promise = fetch(url);
+    return promise;
 }

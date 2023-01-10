@@ -1,44 +1,65 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {getRepairApiCall} from '../apiCalls/repairApiCalls';
+import RepairListTable from './repairs/repairListTable';
 
-function Repairs() {
-    const  repairs = getRepairApiCall();
-    
 
-    return( 
-        <main>
-        <table className="table-list">
-         <thead>
-             <tr>
-                 <th>Auto</th>
-                 <th>Mechanik</th>
-                 <th>Opis naprawy</th>
-                 <th>Data naprawy</th>
-                 <th>Akcje</th>
-             </tr>
-         </thead>
-         <tbody>
-         {repairs.map(repair => (
-            <tr>
-                <td>{repair.car.Model}</td>
-                <td>{repair.mechanic.firstName}</td>
-                <td>{repair.description}</td>
-                <td>{repair.repairment_date}</td>
-                <td className="list-actions">
-                <ul>
-                    <li><Link to={`details/${repair._id}`} className="list-actions-button-details">Szczegóły</Link></li>
-                    <li><Link to={`delete/${repair._id}`} className="list-actions-button-delete">Usuń naprawę</Link></li>
-                    <li><Link to={`edit/${repair._id}`} className="list-actions-button-edit">Edytuj Naprawę</Link></li>
-                </ul>
-                </td>
-            </tr>
-         ))}
-         </tbody>
-        </table>
-        <p><a href="/repairs/add" className="button-add">Dodaj nową naprawę</a></p>
-     </main>
+class Repairs extends React.Component  {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            repairs: []
+        }
+    };
+
+    fetchRepairList = () => {
+        getRepairApiCall()
+        .then(res => res.json())
+        .then((data) => {
+            this.setState({
+                isLoaded: true,
+                repairs: data
+        });
+    },
+        (error) => {
+            this.setState({
+                isLoaded: true,
+                error
+            });
+        }
     )
 }
 
-export default Repairs
+componentDidMount() {
+    this.fetchRepairList();
+}
+
+render(){
+    const {error, isLoaded, repairs} = this.state;
+    let content;
+    
+    if(error) {
+        content = <p> Błąd: {error.message}</p>
+    }
+    else if(!isLoaded) {
+        content = <p>Ładowanie danych Napraw ... </p>
+    }
+    else {
+        content = <RepairListTable repairList={repairs} />
+    }
+
+    return (
+        <main>
+            <h2>Lista Napraw</h2>
+            {content}
+            <p className="form-buttons">
+                <Link to="/repairs/add" className="button-add">Dodaj Nową naprawę</Link>
+            </p>
+        </main>
+    )
+    }
+}
+
+export default Repairs;

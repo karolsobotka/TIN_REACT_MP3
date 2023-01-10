@@ -11,9 +11,9 @@ function EmployeeListTableRow(props) {
             <td>{emp.address}</td>
             <td className="list-actions">
                 <ul>
-                    <li><Link to={`details/${emp._id}`} className="list-actions-button-details">Szczegóły</Link></li>
-                    <li><Link to={`delete/${emp._id}`} className="list-actions-button-delete">Usuń Pracownika</Link></li>
-                    <li><Link to={`edit/${emp._id}`} className="list-actions-button-edit">Edytuj Pracownika</Link></li>
+                    <li><Link to={`/details/${emp._id}`} className="list-actions-button-details">Szczegóły</Link></li>
+                    <li><Link to={`/delete/${emp._id}`} className="list-actions-button-delete">Usuń Pracownika</Link></li>
+                    <li><Link to={`/edit/${emp._id}`} className="list-actions-button-edit">Edytuj Pracownika</Link></li>
                 </ul>
             </td>
         </tr>

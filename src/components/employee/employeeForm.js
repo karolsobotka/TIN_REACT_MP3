@@ -1,7 +1,35 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import formMode from '../../helpers/formHelper';
 
 class EmployeeForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        const paramsEmpId = props.match.params.empId;
+        const currentFormMode = paramsEmpId ? formMode.EDIT : formMode.NEW;
+
+        this.state = {
+            empId: paramsEmpId,
+            emp: {
+                firstName: '',
+                lastName: '',
+                phone_number: '',
+                address: '',
+            },
+            errors:{
+                firstName: '',
+                lastName: '',
+                phone_number: '',
+                address: '',
+            },
+            formMode: currentFormMode,
+            redirect: false,
+            error: null
+        }
+    }
+    
     render() {
         return (
             <main>

@@ -5,6 +5,7 @@ import {getCarApiCall} from '../../apiCalls/carApiCalls';
 
 class RepairForm extends React.Component {
     render() {
+        console.log(getEmployeeApiCall());
         const allEmps = getEmployeeApiCall();
         const allCars = getCarApiCall();
 

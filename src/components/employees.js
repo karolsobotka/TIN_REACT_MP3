@@ -59,45 +59,6 @@ componentDidMount() {
                 </p>
             </main>
         )
-            // const  employees = getEmployeeApiCall();
-            // return (
-
-            //     <main>
-            //         <table className="table-list">
-            //          <thead>
-            //              <tr>
-            //                  <th>Imię</th>
-            //                  <th>Nazwisko</th>
-            //                  <th>Numer Telefonu</th>
-            //                  <th>Adres</th>
-            //                  <th>Akcje</th>
-            //              </tr>
-            //          </thead>
-            //          <tbody>
-            //          {employees.map(emp => (
-            //              <tr key={emp._id}>
-            //              <td>{emp.firstName}</td>
-            //              <td>{emp.lastName}</td>
-            //              <td>{emp.phone_number}</td>
-            //              <td>{emp.address}</td>
-            //              <td className="list-actions">
-            //                 <ul>
-            //                     <li><Link to={`details/${emp._id}`} className="list-actions-button-details">Szczegóły</Link></li>
-            //                     <li><Link to={`delete/${emp._id}`} className="list-actions-button-delete">Usuń Pracownika</Link></li>
-            //                     <li><Link to={`edit/${emp._id}`} className="list-actions-button-edit">Edytuj Pracownika</Link></li>
-            //                 </ul>
-            //              </td>
-            //          </tr>
-            //          ))}
-            //          </tbody>
-                     
-            //          </table>
-            //         <p><Link to="/employees/add" className="button-add">Dodaj nowego pracownika</Link></p>
-            //      </main>
-                 
-            
-                    
-            //     )
         }
 
 }
