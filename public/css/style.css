@@ -87,10 +87,16 @@ main h2 {
     margin-bottom: 2rem;
 }
 
+h2 {
+    column-span: all;
+    grid-column: 1 / span 3;
+}
 .table-list {
     border-collapse: collapse;
     color: white;
     width: 100%;
+    column-span: all;
+    grid-column: 1 / span 3;
 }
 
 .table-list, .table-list th, .table-list td {
@@ -99,14 +105,14 @@ main h2 {
 }
 
 .table-list th, .table-list td {
-    padding: 01.5rem;
+    padding: 1.5rem;
 }
 .table-list th {
-        background-color: #553d67;
+    background-color: #553d67;
 
 }
 
- .table-list tbody tr:nth-child(even) {
+.table-list tbody tr:nth-child(even) {
     background-color: #724f8d;
 }
 .table-list tbody tr:nth-child(odd) {
@@ -137,6 +143,7 @@ main h2 {
 .list-actions-button-edit,
 .list-actions-button-delete,
 .button-add,
+.button-edit,
 .form-button-submit,
 .form-button-cancel {
     border: none;
@@ -148,10 +155,12 @@ main h2 {
 }
 h1{
     color: white;
+    
 }
 
 
 .list-actions-button-details,
+.list-actions-button-delete,
 .list-actions-button-edit {
     margin-right: 1rem;
 }
@@ -178,19 +187,22 @@ h1{
 }
 
 .button-add,
+.button-edit,
 .form-button-submit,
 .form-button-cancel {
     padding: 0.5rem 1rem;
 }
 
 .button-add,
+.button-edit,
 .form-button-submit {
     background-color: #27ae60;
 }
 
 .button-add:hover,
+.button-edit:hover
 .form-button-submit:hover {
-    background-color: #2ecc71;
+    background-color: #d42384;
 }
 
 button, input, select, textarea {
@@ -203,11 +215,13 @@ button, input, select, textarea {
 
 textarea {
     overflow: auto;
+    
 }
 
 .form {
     display: grid;
     grid-template-columns: 150px 300px 1fr;
+    gap: 1rem;
     color:white;
 }
 
@@ -232,14 +246,16 @@ textarea {
     color:#c0392b;
 }
 
-.form-buttons {
+ .form-buttons {
     grid-column: 1 / span 2;
+    margin-top: 10px;
 }
 
 .form input.error-input,
 .form select.error-input {
     border: 3px solid #e74c3c;
 }
+
 
 
 
