@@ -6,6 +6,7 @@ import EmployeesListTable from './employee/employeeListTable';
 class Employees extends React.Component {
     constructor(props) {
         super(props);
+//let notice = props.location.state && props.location.state.notice ? props.location.state.notice : '';
         this.state = {
             error: null,
             isLoaded: false,
@@ -52,7 +53,9 @@ componentDidMount() {
 
         return (
             <main>
+                
                 <h2>Lista Mechaników</h2>
+                <p className="success">{this.state.notice}</p>
                 {content}
                 <p className="form-buttons">
                     <Link to="/employees/add" className="button-add">Dodaj Nowego Mechanika</Link>
