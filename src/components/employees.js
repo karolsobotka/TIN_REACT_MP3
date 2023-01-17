@@ -6,7 +6,7 @@ import EmployeesListTable from './employee/employeeListTable';
 class Employees extends React.Component {
     constructor(props) {
         super(props);
-//let notice = props.location.state && props.location.state.notice ? props.location.state.notice : '';
+        //let notice = props.location.state && props.location.state.notice ? props.location.state.notice : '';
         this.state = {
             error: null,
             isLoaded: false,
